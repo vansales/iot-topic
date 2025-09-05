@@ -53,14 +53,29 @@ Cloud → Device
 ### 🧾 Sample Payloads
 
 #### 🔓 ปลดล็อกช่อง
+ส่งคำสั่งปลดล็อกช่อง Locker
 
 ```json
 {
   "id": "9ac2f7d0-d053-4a3f-bb6c-2cfde3451aa7",
   "machine_id": "mac_31287",
-  "order_no": "ORD-20250622-0001",
   "command": "open",
-  "locker": 16
+  "params": {
+    "locker": 16 
+    "order_no": "ORD-20250622-0001",
+  }
+}
+```
+
+#### ปรับราคา
+ส่งคำสั่งปรับราคาสินค้าแต่ละตู้
+
+```json
+{
+  "id": "9ac2f7d0-d053-4a3f-bb6c-2cfde3451aa7",
+  "machine_id": "mac_31287",
+  "command": "update_price",
+  "params": {}
 }
 ```
 
@@ -70,9 +85,11 @@ Cloud → Device
 {
   "id": "63e77a8a-36d4-44fd-865c-5584b7de0917",
   "machine_id": "mac_31287",
-  "order_no": "ORD-20250622-0001",
   "command": "display_qr",
-  "qr_base64": "iVBORw0KGgoAAAANSUhEUgAA..."
+  "params": {
+    "qr_base64": "iVBORw0KGgoAAAANSUhEUgAA..."
+    "order_no": "ORD-20250622-0001",
+  }
 }
 ```
 
@@ -83,7 +100,9 @@ Cloud → Device
   "id": "7f13c9f4-55b6-4c7f-b269-4814b0701cd5",
   "machine_id": "mac_31287",
   "command": "msg_display",
-  "message": "ขอบคุณที่ใช้บริการ"
+  "params": {
+    "message": "ขอบคุณที่ใช้บริการ"
+  }
 }
 ```
 
@@ -94,6 +113,26 @@ Cloud → Device
   "id": "e7b455c2-3a8f-4a33-8872-267317705157",
   "machine_id": "mac_31287",
   "command": "refill_all"
+}
+```
+
+#### Reset
+
+```json
+{
+  "id": "e7b455c2-3a8f-4a33-8872-267317705157",
+  "machine_id": "mac_31287",
+  "command": "reset"
+}
+```
+
+#### Reset
+
+```json
+{
+  "id": "e7b455c2-3a8f-4a33-8872-267317705157",
+  "machine_id": "mac_31287",
+  "command": "restart"
 }
 ```
 
@@ -115,13 +154,13 @@ Device → Cloud
 
 ### 🧾 Sample Payload
 
+Command ที่ได้รับจาก Server ส่งกลับเพื่อยืนยัน ว่าได้รบและทำงานแล้วถูกต้อง
+
 ```json
 {
   "id": "9ac2f7d0-d053-4a3f-bb6c-2cfde3451aa7",
   "machine_id": "mac_31287",
-  "order_no": "ORD-20250622-0001",
-  "command": "open",
-  "locker": 16,
+  "command": "open", 
   "timestamp": 1702817285,
   "result": "success"
 }
